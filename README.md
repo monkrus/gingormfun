@@ -4,4 +4,4 @@
 
 2. go get github.com/gin-gonic/gin github.com/jinzhu/gorm
 
-3. 
+
