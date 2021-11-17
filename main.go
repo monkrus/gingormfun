@@ -1,19 +1,25 @@
 package main
 
 import (
-	"net/http"
+	"github.com/rahmanfadhil/gin-bookstore/controllers"
+	"github.com/rahmanfadhil/gin-bookstore/models"
 
 	"github.com/gin-gonic/gin"
-	"github.com/monkrus/gingormfun.git/model"
 )
 
 func main() {
 	r := gin.Default()
 
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"data": "test"})
-	})
-	model.ConnectDatabase() // new
+	// Connect to database
+	models.ConnectDatabase()
 
+	// Routes
+	r.GET("/books", controllers.FindBooks)
+	r.GET("/books/:id", controllers.FindBook)
+	r.POST("/books", controllers.CreateBook)
+	r.PATCH("/books/:id", controllers.UpdateBook)
+	r.DELETE("/books/:id", controllers.DeleteBook)
+
+	// Run the server
 	r.Run()
 }
